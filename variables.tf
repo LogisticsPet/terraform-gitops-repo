@@ -3,6 +3,7 @@ variable "platform" {
   description = "Stack name"
   validation {
     condition     = contains(["core", "app"], var.platform)
+    error_message = "Variable can contain only 'core' or 'app' values"
   }
 }
 
