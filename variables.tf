@@ -14,11 +14,6 @@ variable "stage" {
 }
 
 variable "template_variables" {
-  type        = map(string)
+  type        = object({})
   description = "Set of variables for templates"
-  default = {
-    argoNamespace      = "argocd",
-    projectName        = "project",
-    serviceAccountName = "test"
-  }
 }
