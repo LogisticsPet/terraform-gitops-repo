@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: cert-manager
+  namespace: ${argo_namespace}
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+    - clusters: {}  # Dynamically generate applications for each cluster in the Argo CD managed clusters
+  template:
+    metadata:
+      name: "{{.name}}-cert-manager"
+    spec:
+      project: ${project_name}
+      source:
+        name: cert-manager
+        repoURL: https://charts.jetstack.io
+        chart: cert-manager
+        targetRevision: v1.16.2
+        helm:
+          valuesObject:
+            installCRDs: true
+            serviceAccount:
+              annotations: ${serviceAccountAnnotations}
+      destination:
+        server: "{{.server}}"
+        namespace: "cert-manager"  # You can customize namespaces based on the cluster
+      syncPolicy:
+        automated:
+          prune: true  # Automatically prune outdated resources
+          selfHeal: true  # Auto-heal if the state is out of sync

@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: jetstack
+  namespace: ${argo_namespace}
+  labels:
+    argocd.argoproj.io/secret-type: repository
+stringData:
+  name: "jetstack"
+  type: "helm"
+  url: "https://charts.jetstack.io"
+  project: "${project_name}"
+
