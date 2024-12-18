@@ -1,8 +1,8 @@
 locals {
-  name = var.stage != null ? var.stage : var.platform
-  template_base_path = "templates/${var.platform}"
+  name                = var.stage != null ? var.stage : var.platform
+  template_base_path  = "templates/${var.platform}"
   all_files_with_dirs = fileset(local.template_base_path, "**/*")
-  filtered_files = [for file in local.all_files_with_dirs : file if !can(regex("/$", file))]
+  filtered_files      = [for file in local.all_files_with_dirs : file if !can(regex("/$", file))]
 }
 
 resource "github_repository" "gitops_repo" {
@@ -33,10 +33,10 @@ data "local_file" "template_files" {
 }
 
 resource "github_repository_file" "core_files" {
-  for_each = var.platform == "core" ? data.local_file.template_files : []
+  for_each   = var.platform == "core" ? data.local_file.template_files : []
   repository = github_repository.gitops_repo.name
   file       = each.key
-  content    = templatefile("${local.template_base_path}/${each.key}", merge(var.template_variables, {
+  content = templatefile("${local.template_base_path}/${each.key}", merge(var.template_variables, {
     repo = github_repository.gitops_repo.http_clone_url
     })
   )

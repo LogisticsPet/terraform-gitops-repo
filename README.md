@@ -11,12 +11,13 @@ Terraform module to create DNS records in cloudflare zone
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | 1.10.2 |
-| <a name="requirement_cloudflare"></a> [cloudflare](#requirement\_cloudflare) | 4.48.0 |
+| <a name="requirement_local"></a> [local](#requirement\_local) | 2.5.1 |
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_cloudflare"></a> [cloudflare](#provider\_cloudflare) | 4.48.0 |
+| <a name="provider_github"></a> [github](#provider\_github) | 6.4.0 |
+| <a name="provider_local"></a> [local](#provider\_local) | 2.5.1 |
 ## Modules
 
 No modules.
@@ -24,16 +25,20 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [cloudflare_record.record](https://registry.terraform.io/providers/cloudflare/cloudflare/4.48.0/docs/resources/record) | resource |
-| [cloudflare_zone.zone](https://registry.terraform.io/providers/cloudflare/cloudflare/4.48.0/docs/data-sources/zone) | data source |
+| [github_repository.gitops_repo](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository) | resource |
+| [github_repository_file.core_files](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository_file) | resource |
+| [github_repository_file.readme](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository_file) | resource |
+| [local_file.template_files](https://registry.terraform.io/providers/hashicorp/local/2.5.1/docs/data-sources/file) | data source |
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_domain"></a> [domain](#input\_domain) | Domain name to register records for | `string` | n/a | yes |
-| <a name="input_records"></a> [records](#input\_records) | List of DNS records to create | `map(list(string))` | n/a | yes |
-| <a name="input_root_domain"></a> [root\_domain](#input\_root\_domain) | Root application domain name | `string` | n/a | yes |
+| <a name="input_platform"></a> [platform](#input\_platform) | Stack name | `string` | n/a | yes |
+| <a name="input_stage"></a> [stage](#input\_stage) | Stack name | `string` | `""` | no |
+| <a name="input_template_variables"></a> [template\_variables](#input\_template\_variables) | Set of variables for templates | `map(string)` | <pre>{<br/>  "argoNamespace": "argocd",<br/>  "projectName": "project",<br/>  "serviceAccountName": "test"<br/>}</pre> | no |
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_http_url"></a> [http\_url](#output\_http\_url) | Http url of created repository |
 <!-- END_TF_DOCS -->
