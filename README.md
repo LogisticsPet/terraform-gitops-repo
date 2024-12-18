@@ -2,7 +2,7 @@
 ![lint](https://github.com/LogisticsPet/terraform-gitops-repo/actions/workflows/lint.yml/badge.svg?branch=main)
 ![sec](https://github.com/LogisticsPet/terraform-gitops-repo/actions/workflows/tfsec.yml/badge.svg?branch=main)
 ## Introduction
-Terraform module to create DNS records in cloudflare zone
+Terraform module to create GitOps repo
 
 <!-- BEGIN_TF_DOCS -->
   
