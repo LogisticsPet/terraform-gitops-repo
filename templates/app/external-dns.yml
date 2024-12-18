@@ -1,0 +1,32 @@
+#apiVersion: argoproj.io/v1alpha1
+#kind: ApplicationSet
+#metadata:
+#  name: external-dns
+#  namespace: ${argo_namespace}
+#spec:
+#  goTemplate: true
+#  goTemplateOptions: ["missingkey=error"]
+#  generators:
+#    - clusters: {}  # Dynamically generate applications for each cluster in the Argo CD managed clusters
+#  template:
+#    metadata:
+#      name: "{{.name}}-external-dns"
+#    spec:
+#      project:  ${project_name}
+#      source:
+#        name: external-dns
+#        repoURL: https://kubernetes-sigs.github.io/external-dns/
+#        chart: external-dns
+#        targetRevision: 1.14.3
+#        helm:
+#          valuesObject:
+#            policy: "sync"
+#            serviceAccount:
+#              annotations: ${serviceAccountAnnotations}
+#      destination:
+#        server: "{{.server}}"
+#        namespace: "external-dns"
+#      syncPolicy:
+#        automated:
+#          prune: true
+#          selfHeal: true
