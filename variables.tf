@@ -10,7 +10,7 @@ variable "platform" {
 variable "stage" {
   type        = string
   description = "Stack name"
-  default     = ""
+  default     = null
 }
 
 variable "template_variables" {
