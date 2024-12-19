@@ -17,7 +17,7 @@ variable "template_variables" {
   type = object({
     argo_namespace = string
     project_name   = string
-    apps = map(any)
+    apps           = map(any)
   })
   default = {
     argo_namespace = "string"
@@ -25,7 +25,7 @@ variable "template_variables" {
     apps = {
       "certmanager" = {
         service_account = {
-          name        = "string"
+          name = "string"
           annotations = {
             "aa" : "bb"
           }

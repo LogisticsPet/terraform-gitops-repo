@@ -37,7 +37,7 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_platform"></a> [platform](#input\_platform) | Stack name | `string` | n/a | yes |
 | <a name="input_stage"></a> [stage](#input\_stage) | Stack name | `string` | `null` | no |
-| <a name="input_template_variables"></a> [template\_variables](#input\_template\_variables) | Set of variables for templates | <pre>object({<br/>    argo_namespace = string<br/>    project_name   = string<br/>    apps = list(object({<br/>      certmanager = object({<br/>        service_account_name        = string<br/>        service_account_annotations = map(string)<br/>      })<br/>    }))<br/>  })</pre> | n/a | yes |
+| <a name="input_template_variables"></a> [template\_variables](#input\_template\_variables) | Set of variables for templates | <pre>object({<br/>    argo_namespace = string<br/>    project_name   = string<br/>    apps           = map(any)<br/>  })</pre> | <pre>{<br/>  "apps": {<br/>    "certmanager": {<br/>      "service_account": {<br/>        "annotations": {<br/>          "aa": "bb"<br/>        },<br/>        "name": "string"<br/>      }<br/>    }<br/>  },<br/>  "argo_namespace": "string",<br/>  "project_name": "string"<br/>}</pre> | no |
 ## Outputs
 
 | Name | Description |
