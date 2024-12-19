@@ -6,7 +6,7 @@ locals {
 }
 
 resource "github_repository" "gitops_repo" {
-  name                      = "${}${local.name}-stack-gitops"
+  name                      = "${local.name}-stack-gitops"
   has_discussions           = false
   has_downloads             = false
   has_issues                = false
