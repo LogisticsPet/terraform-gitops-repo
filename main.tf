@@ -18,7 +18,7 @@ resource "github_repository" "gitops_repo" {
   squash_merge_commit_title = "PR_TITLE"
   delete_branch_on_merge    = true
   auto_init                 = true
-  visibility = "public"
+  visibility                = "public"
 }
 
 resource "github_branch_default" "default_branch" {
@@ -32,7 +32,7 @@ resource "github_repository_file" "readme" {
   file                = "README.md"
   content             = "${local.name} platfrom GitOps repository for ArgoCD"
   overwrite_on_create = true
-  branch = github_branch_default.default_branch.branch
+  branch              = github_branch_default.default_branch.branch
 }
 
 data "local_file" "template_files" {
@@ -44,7 +44,7 @@ resource "github_repository_file" "core_files" {
   for_each   = data.local_file.template_files
   repository = github_repository.gitops_repo.name
   file       = each.key
-  branch = github_branch_default.default_branch.branch
+  branch     = github_branch_default.default_branch.branch
   content = templatefile("${local.template_base_path}/${each.key}", {
     repo          = github_repository.gitops_repo.http_clone_url
     template_vars = var.template_variables

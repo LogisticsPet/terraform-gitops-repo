@@ -26,6 +26,7 @@ No modules.
 
 | Name | Type |
 |------|------|
+| [github_branch_default.default_branch](https://registry.terraform.io/providers/integrations/github/6.4.0/docs/resources/branch_default) | resource |
 | [github_repository.gitops_repo](https://registry.terraform.io/providers/integrations/github/6.4.0/docs/resources/repository) | resource |
 | [github_repository_file.core_files](https://registry.terraform.io/providers/integrations/github/6.4.0/docs/resources/repository_file) | resource |
 | [github_repository_file.readme](https://registry.terraform.io/providers/integrations/github/6.4.0/docs/resources/repository_file) | resource |
