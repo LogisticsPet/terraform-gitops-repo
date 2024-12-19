@@ -33,7 +33,7 @@ data "local_file" "template_files" {
 }
 
 resource "github_repository_file" "core_files" {
-  for_each   = var.platform == "core" ? toset(data.local_file.template_files) : []
+  for_each   = data.local_file.template_files
   repository = github_repository.gitops_repo.name
   file       = each.key
   content = templatefile("${local.template_base_path}/${each.key}", {
