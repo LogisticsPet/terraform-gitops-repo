@@ -22,9 +22,9 @@ spec:
           valuesObject:
             installCRDs: true
             serviceAccount:
-              name: ${template_vars.apps["certmanager"]["service_account"]["name"]}
+              name: "${template_vars.apps["certmanager"]["service_account"]["name"]}"
               annotations:
-                eks.amazonaws.com/role-arn: ${template_vars.apps["certmanager"]["service_account"]["iam_role_arn"]}
+                eks.amazonaws.com/role-arn: "${template_vars.apps["certmanager"]["service_account"]["iam_role_arn"]}"
                 eks.amazonaws.com/sts-regional-endpoints: true
       destination:
         server: "{{.server}}"
