@@ -2,11 +2,11 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: external-dns
-  namespace: ${argo_namespace}
+  namespace: ${template_vars.argo_namespace}
   labels:
     argocd.argoproj.io/secret-type: repository
 stringData:
   name: "external-dns"
   type: "helm"
   url: "https://kubernetes-sigs.github.io/external-dns/"
-  project: "${project_name}"
+  project: "${template_vars.project_name}"

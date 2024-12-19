@@ -1,8 +1,8 @@
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
-  name: ${project_name}
-  namespace: ${argo_namespace}
+  name: ${template_vars.project_name}
+  namespace: ${template_vars.argo_namespace}
 spec:
   description: "Project for auxiliary tooling resources in core platform"
   sourceRepos:

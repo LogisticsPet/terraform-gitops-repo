@@ -1,7 +1,7 @@
 locals {
   name                = var.stage != null ? var.stage : var.platform
   template_base_path  = "templates/${var.platform}"
-  all_files_with_dirs = fileset(local.template_base_path, "**/*")
+  all_files_with_dirs = fileset(local.template_base_path, "/**")
   filtered_files      = [for file in local.all_files_with_dirs : file if !can(regex("/$", file))]
 }
 

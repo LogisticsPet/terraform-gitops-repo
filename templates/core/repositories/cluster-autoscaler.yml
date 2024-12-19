@@ -2,11 +2,11 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: cluster-autoscaler
-  namespace: ${argo_namespace}
+  namespace: ${template_vars.argo_namespace}
   labels:
     argocd.argoproj.io/secret-type: repository
 stringData:
   name: "cluster-autoscaler"
   type: "helm"
   url: "https://kubernetes.github.io/autoscaler"
-  project: "${project_name}"
+  project: "${template_vars.project_name}"

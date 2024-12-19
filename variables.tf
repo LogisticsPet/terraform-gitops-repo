@@ -17,12 +17,21 @@ variable "template_variables" {
   type = object({
     argo_namespace = string
     project_name   = string
-    apps = list(object({
-      certmanager = object({
-        service_account_name        = string
-        service_account_annotations = map(string)
-      })
-    }))
+    apps = map(any)
   })
+  default = {
+    argo_namespace = "string"
+    project_name   = "string"
+    apps = {
+      "certmanager" = {
+        service_account = {
+          name        = "string"
+          annotations = {
+            "aa" : "bb"
+          }
+        }
+      }
+    }
+  }
   description = "Set of variables for templates"
 }

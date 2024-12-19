@@ -2,11 +2,11 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: aws-eks-charts
-  namespace: ${argo_namespace}
+  namespace: ${template_vars.argo_namespace}
   labels:
     argocd.argoproj.io/secret-type: repository
 stringData:
   name: "aws-eks-charts"
   type: "helm"
   url: "https://aws.github.io/eks-charts"
-  project: "${project_name}"
+  project: "${template_vars.project_name}"
