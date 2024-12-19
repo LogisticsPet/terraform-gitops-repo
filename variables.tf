@@ -14,12 +14,12 @@ variable "stage" {
 }
 
 variable "template_variables" {
-  type        = object({
+  type = object({
     argo_namespace = string
-    project_name = string
+    project_name   = string
     apps = list(object({
       certmanager = object({
-        service_account_name = string
+        service_account_name        = string
         service_account_annotations = map(string)
       })
     }))

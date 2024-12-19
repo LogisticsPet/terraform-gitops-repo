@@ -10,7 +10,7 @@ Terraform module to create GitOps repo
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | 1.10.2 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | 1.10.3 |
 | <a name="requirement_github"></a> [github](#requirement\_github) | 6.4.0 |
 | <a name="requirement_local"></a> [local](#requirement\_local) | 2.5.1 |
 ## Providers
@@ -35,8 +35,8 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_platform"></a> [platform](#input\_platform) | Stack name | `string` | n/a | yes |
-| <a name="input_stage"></a> [stage](#input\_stage) | Stack name | `string` | `""` | no |
-| <a name="input_template_variables"></a> [template\_variables](#input\_template\_variables) | Set of variables for templates | `map(string)` | <pre>{<br/>  "argoNamespace": "argocd",<br/>  "projectName": "project",<br/>  "serviceAccountName": "test"<br/>}</pre> | no |
+| <a name="input_stage"></a> [stage](#input\_stage) | Stack name | `string` | `null` | no |
+| <a name="input_template_variables"></a> [template\_variables](#input\_template\_variables) | Set of variables for templates | <pre>object({<br/>    argo_namespace = string<br/>    project_name   = string<br/>    apps = list(object({<br/>      certmanager = object({<br/>        service_account_name        = string<br/>        service_account_annotations = map(string)<br/>      })<br/>    }))<br/>  })</pre> | n/a | yes |
 ## Outputs
 
 | Name | Description |

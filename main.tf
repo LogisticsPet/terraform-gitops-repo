@@ -37,7 +37,7 @@ resource "github_repository_file" "core_files" {
   repository = github_repository.gitops_repo.name
   file       = each.key
   content = templatefile("${local.template_base_path}/${each.key}", {
-    repo = github_repository.gitops_repo.http_clone_url
+    repo          = github_repository.gitops_repo.http_clone_url
     template_vars = var.template_variables
   })
 }
