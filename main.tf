@@ -36,8 +36,8 @@ resource "github_repository_file" "core_files" {
   for_each   = var.platform == "core" ? data.local_file.template_files : []
   repository = github_repository.gitops_repo.name
   file       = each.key
-  content = templatefile("${local.template_base_path}/${each.key}", merge(var.template_variables, {
+  content = templatefile("${local.template_base_path}/${each.key}", {
     repo = github_repository.gitops_repo.http_clone_url
-    })
-  )
+    template_vars = var.template_variables
+  })
 }
