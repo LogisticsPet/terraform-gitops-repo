@@ -25,7 +25,7 @@ variable "template_variables" {
     apps = {
       "certmanager" = {
         service_account = {
-          name = "string"
+          name         = "string"
           iam_role_arn = "string"
         }
       }
