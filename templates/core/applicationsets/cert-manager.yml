@@ -23,8 +23,9 @@ spec:
             installCRDs: true
             serviceAccount:
               name: ${template_vars.apps["certmanager"]["service_account"]["name"]}
-              annotations: |
-                ${join("\n", [for k, v in template_vars.apps["certmanager"]["service_account"]["annotations"] : "  ${k}: ${v}"])}
+              annotations:
+                eks.amazonaws.com/role-arn: ${template_vars.apps["certmanager"]["service_account"]["iam_role_arn"]}
+                eks.amazonaws.com/sts-regional-endpoints: true
       destination:
         server: "{{.server}}"
         namespace: "cert-manager"  # You can customize namespaces based on the cluster

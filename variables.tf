@@ -26,9 +26,7 @@ variable "template_variables" {
       "certmanager" = {
         service_account = {
           name = "string"
-          annotations = {
-            "aa" : "bb"
-          }
+          iam_role_arn = "string"
         }
       }
     }
