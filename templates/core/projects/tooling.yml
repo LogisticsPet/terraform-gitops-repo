@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: ${template_vars.project_name}
+  namespace: ${template_vars.argo_namespace}
+spec:
+  description: "Project for auxiliary tooling resources in core platform"
+  sourceRepos:
+    - "${repo}"
+  destinations:
+    - server: "https://kubernetes.default.svc"
+      namespace: "*"
+  clusterResourceWhitelist:
+    - group: "*"
+      kind: "*"
+  namespaceResourceBlacklist:
+    - group: "apps"
+      kind: "Deployment"
