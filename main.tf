@@ -6,7 +6,7 @@ locals {
 }
 
 resource "github_repository" "gitops_repo" {
-  name                      = "${local.name}-stack-gitops"
+  name                      = "${}${local.name}-stack-gitops"
   has_discussions           = false
   has_downloads             = false
   has_issues                = false
@@ -33,7 +33,7 @@ data "local_file" "template_files" {
 }
 
 resource "github_repository_file" "core_files" {
-  for_each   = var.platform == "core" ? data.local_file.template_files : []
+  for_each   = var.platform == "core" ? toset(data.local_file.template_files) : []
   repository = github_repository.gitops_repo.name
   file       = each.key
   content = templatefile("${local.template_base_path}/${each.key}", {
