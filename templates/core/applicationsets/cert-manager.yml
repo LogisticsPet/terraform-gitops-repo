@@ -12,7 +12,7 @@ spec:
     metadata:
       name: "{{.name}}-cert-manager"
     spec:
-      project: ${template_variables.project_name}
+      project: ${template_vars.project_name}
       source:
         name: cert-manager
         repoURL: https://charts.jetstack.io
@@ -22,8 +22,8 @@ spec:
           valuesObject:
             installCRDs: true
             serviceAccount:
-              name: ${template_variables.apps.certmanager.service_account_name}
-              annotations: ${template_variables.apps.certmanager.service_account_annotations}
+              name: ${template_vars.apps.certmanager.service_account_name}
+              annotations: ${template_vars.apps.certmanager.service_account_annotations}
       destination:
         server: "{{.server}}"
         namespace: "cert-manager"  # You can customize namespaces based on the cluster
