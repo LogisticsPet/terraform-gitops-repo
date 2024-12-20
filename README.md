@@ -28,8 +28,9 @@ No modules.
 |------|------|
 | [github_branch_default.default_branch](https://registry.terraform.io/providers/integrations/github/6.4.0/docs/resources/branch_default) | resource |
 | [github_repository.gitops_repo](https://registry.terraform.io/providers/integrations/github/6.4.0/docs/resources/repository) | resource |
-| [github_repository_file.core_files](https://registry.terraform.io/providers/integrations/github/6.4.0/docs/resources/repository_file) | resource |
+| [github_repository_file.files](https://registry.terraform.io/providers/integrations/github/6.4.0/docs/resources/repository_file) | resource |
 | [github_repository_file.readme](https://registry.terraform.io/providers/integrations/github/6.4.0/docs/resources/repository_file) | resource |
+| [github_repository_file.values](https://registry.terraform.io/providers/integrations/github/6.4.0/docs/resources/repository_file) | resource |
 | [local_file.template_files](https://registry.terraform.io/providers/hashicorp/local/2.5.1/docs/data-sources/file) | data source |
 ## Inputs
 
@@ -37,7 +38,7 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_platform"></a> [platform](#input\_platform) | Stack name | `string` | n/a | yes |
 | <a name="input_stage"></a> [stage](#input\_stage) | Stack name | `string` | `null` | no |
-| <a name="input_template_variables"></a> [template\_variables](#input\_template\_variables) | Set of variables for templates | <pre>object({<br/>    argo_namespace = string<br/>    project_name   = string<br/>    apps           = map(any)<br/>  })</pre> | <pre>{<br/>  "apps": {<br/>    "certmanager": {<br/>      "service_account": {<br/>        "iam_role_arn": "string",<br/>        "name": "string"<br/>      }<br/>    }<br/>  },<br/>  "argo_namespace": "string",<br/>  "project_name": "string"<br/>}</pre> | no |
+| <a name="input_template_variables"></a> [template\_variables](#input\_template\_variables) | Set of variables for templates | <pre>object({<br/>    argo_namespace = string<br/>    project_name   = string<br/>    apps = map(object({<br/>      name      = string<br/>      namespace = string<br/>      values    = object({})<br/>    }))<br/>  })</pre> | <pre>{<br/>  "apps": {<br/>    "certmanager": {<br/>      "name": "cert-manager",<br/>      "namespace": "cert-m=ns",<br/>      "values": {<br/>        "installCRDs": true,<br/>        "serviceAccount": {<br/>          "annotations": {<br/>            "eks.amazonaws.com/role-arn": "arn",<br/>            "eks.amazonaws.com/sts-regional-endpoints": true<br/>          },<br/>          "name": "test_role"<br/>        }<br/>      }<br/>    },<br/>    "ingress": {<br/>      "name": "ingress",<br/>      "namespace": "ing-m=ns",<br/>      "values": {<br/>        "installCRDs": true,<br/>        "serviceAccount": {<br/>          "annotations": {<br/>            "eks.amazonaws.com/role-arn": "arn",<br/>            "eks.amazonaws.com/sts-regional-endpoints": true<br/>          },<br/>          "name": "test_role"<br/>        }<br/>      }<br/>    }<br/>  },<br/>  "argo_namespace": "string",<br/>  "project_name": "string"<br/>}</pre> | no |
 ## Outputs
 
 | Name | Description |

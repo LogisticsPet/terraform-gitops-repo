@@ -52,10 +52,10 @@ resource "github_repository_file" "files" {
 }
 
 resource "github_repository_file" "values" {
-  for_each = var.template_variables.apps
-  repository = github_repository.gitops_repo.name
-  file       = "values/${each.value.name}.yml"
-  content    = yamlencode(each.value.values)
-  branch     = github_branch_default.default_branch.branch
+  for_each       = var.template_variables.apps
+  repository     = github_repository.gitops_repo.name
+  file           = "values/${each.value.name}.yml"
+  content        = yamlencode(each.value.values)
+  branch         = github_branch_default.default_branch.branch
   commit_message = "Add values file for ${each.key}"
 }
