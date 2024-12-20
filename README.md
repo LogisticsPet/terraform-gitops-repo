@@ -30,7 +30,6 @@ No modules.
 | [github_repository.gitops_repo](https://registry.terraform.io/providers/integrations/github/6.4.0/docs/resources/repository) | resource |
 | [github_repository_file.files](https://registry.terraform.io/providers/integrations/github/6.4.0/docs/resources/repository_file) | resource |
 | [github_repository_file.readme](https://registry.terraform.io/providers/integrations/github/6.4.0/docs/resources/repository_file) | resource |
-| [github_repository_file.values](https://registry.terraform.io/providers/integrations/github/6.4.0/docs/resources/repository_file) | resource |
 | [local_file.template_files](https://registry.terraform.io/providers/hashicorp/local/2.5.1/docs/data-sources/file) | data source |
 ## Inputs
 
