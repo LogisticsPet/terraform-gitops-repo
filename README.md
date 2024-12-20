@@ -38,7 +38,7 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_platform"></a> [platform](#input\_platform) | Stack name | `string` | n/a | yes |
 | <a name="input_stage"></a> [stage](#input\_stage) | Stack name | `string` | `null` | no |
-| <a name="input_template_variables"></a> [template\_variables](#input\_template\_variables) | Set of variables for templates | <pre>object({<br/>    argo_namespace = string<br/>    project_name   = string<br/>    apps = map(object({<br/>      name      = string<br/>      namespace = string<br/>      values    = object({})<br/>    }))<br/>  })</pre> | n/a | yes |
+| <a name="input_template_variables"></a> [template\_variables](#input\_template\_variables) | Set of variables for templates | <pre>object({<br/>    argo_namespace = string<br/>    project_name   = string<br/>    apps = map(object({<br/>      name      = string<br/>      namespace = string<br/>      values    = map(any)<br/>    }))<br/>  })</pre> | n/a | yes |
 ## Outputs
 
 | Name | Description |
