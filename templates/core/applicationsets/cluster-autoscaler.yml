@@ -19,8 +19,8 @@ spec:
         chart: cluster-autoscaler
         targetRevision: 9.19.1
         helm:
-          valueFiles:
-            - 'values/${template_vars.apps["cluster_autoscaler"].name}.yml'
+          values: |
+            '${template_vars.apps["cluster_autoscaler"].values}'
       destination:
         server: "{{.server}}"
         namespace: ${template_vars.apps["cluster_autoscaler"].namespace}

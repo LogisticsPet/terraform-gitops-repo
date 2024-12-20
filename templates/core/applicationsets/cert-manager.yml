@@ -19,8 +19,8 @@ spec:
         chart: cert-manager
         targetRevision: v1.16.2
         helm:
-          valueFiles:
-            - 'values/${template_vars.apps["certmanager"].name}.yml'
+          values: |
+            '${template_vars.apps["certmanager"].values}'
       destination:
         server: "{{.server}}"
         namespace: ${template_vars.apps["certmanager"].namespace}

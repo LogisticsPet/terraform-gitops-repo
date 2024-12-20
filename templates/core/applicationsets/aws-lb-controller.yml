@@ -19,8 +19,8 @@ spec:
         chart: aws-load-balancer-controller
         targetRevision: 1.11.0
         helm:
-          valueFiles:
-            - 'values/${template_vars.apps["aws_lb_controller"].name}.yml'
+          values: |
+            '${template_vars.apps["aws_lb_controller"].values}'
       destination:
         server: "{{.server}}"
         namespace: ${template_vars.apps["aws_lb_controller"].namespace}

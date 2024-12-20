@@ -19,8 +19,8 @@ spec:
         chart: external-dns
         targetRevision: 1.14.3
         helm:
-          valueFiles:
-            - 'values/${template_vars.apps["external_dns"].name}.yml'
+          values: |
+            '${template_vars.apps["external_dns"].values}'
       destination:
         server: "{{.server}}"
         namespace: ${template_vars.apps["external_dns"].namespace}
