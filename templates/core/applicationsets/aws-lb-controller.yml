@@ -19,8 +19,7 @@ spec:
         chart: aws-load-balancer-controller
         targetRevision: 1.11.0
         helm:
-          values: |
-            '${template_vars.apps["aws_lb_controller"].values}'
+          values: ${jsonencode(yamldecode(template_vars.apps["aws_lb_controller"].values))}
       destination:
         server: "{{.server}}"
         namespace: ${template_vars.apps["aws_lb_controller"].namespace}
@@ -28,3 +27,5 @@ spec:
         automated:
           prune: true  # Automatically prune outdated resources
           selfHeal: true  # Auto-heal if the state is out of sync
+        syncOptions:
+          - CreateNamespace=true

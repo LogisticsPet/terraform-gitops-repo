@@ -19,8 +19,7 @@ spec:
         chart: cluster-autoscaler
         targetRevision: 9.19.1
         helm:
-          values: |
-            '${template_vars.apps["cluster_autoscaler"].values}'
+          values: ${jsonencode(yamldecode(template_vars.apps["cluster_autoscaler"].values))}
       destination:
         server: "{{.server}}"
         namespace: ${template_vars.apps["cluster_autoscaler"].namespace}
@@ -28,3 +27,5 @@ spec:
         automated:
           prune: true  # Automatically prune outdated resources
           selfHeal: true  # Auto-heal if the state is out of sync
+        syncOptions:
+          - CreateNamespace=true
