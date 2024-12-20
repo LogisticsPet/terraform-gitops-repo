@@ -17,16 +17,42 @@ variable "template_variables" {
   type = object({
     argo_namespace = string
     project_name   = string
-    apps           = map(any)
+    apps           = map(object({
+      name  = string
+      namespace = string
+      values = object({})
+    }))
   })
   default = {
     argo_namespace = "string"
     project_name   = "string"
     apps = {
       "certmanager" = {
-        service_account = {
-          name         = "string"
-          iam_role_arn = "string"
+        name = "cert-manager"
+        namespace = "cert-m=ns"
+        values = {
+          installCRDs =  true
+          serviceAccount = {
+            name = "test_role"
+            annotations = {
+              "eks.amazonaws.com/role-arn": "arn"
+              "eks.amazonaws.com/sts-regional-endpoints" = true
+            }
+          }
+        }
+      },
+      "ingress" = {
+        namespace = "ing-m=ns"
+        name = "ingress"
+        values = {
+          installCRDs =  true
+          serviceAccount = {
+            name = "test_role"
+            annotations = {
+              "eks.amazonaws.com/role-arn": "arn"
+              "eks.amazonaws.com/sts-regional-endpoints" = true
+            }
+          }
         }
       }
     }
