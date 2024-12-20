@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: ${template_vars.apps["aws_lb_controller"].name}
+  namespace: ${template_vars.argo_namespace}
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+    - clusters: {}  # Dynamically generate applications for each cluster in the Argo CD managed clusters
+  template:
+    metadata:
+      name: '{{.name}}-${template_vars.apps["aws_lb_controller"].name}'
+    spec:
+      project: ${template_vars.project_name}
+      source:
+        name: nginx-ingress-controller
+        repoURL: https://aws.github.io/eks-charts
+        chart: aws-load-balancer-controller
+        targetRevision: 1.11.0
+        helm:
+          valueFiles:
+            - 'values/${template_vars.apps["aws_lb_controller"].name}.yml'
+      destination:
+        server: "{{.server}}"
+        namespace: ${template_vars.apps["aws_lb_controller"].namespace}
+      syncPolicy:
+        automated:
+          prune: true  # Automatically prune outdated resources
+          selfHeal: true  # Auto-heal if the state is out of sync
