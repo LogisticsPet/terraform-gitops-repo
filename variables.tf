@@ -20,7 +20,7 @@ variable "template_variables" {
     apps = map(object({
       name      = string
       namespace = string
-      values    = object({})
+      values    = map(any)
     }))
   })
   description = "Set of variables for templates"
