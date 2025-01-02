@@ -1,0 +1,34 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: ${template_vars.apps["cluster_autoscaler"].name}
+  namespace: ${template_vars.argo_namespace}
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+    - clusters: {}  # Dynamically generate applications for each cluster in the Argo CD managed clusters
+  template:
+    metadata:
+      name: '{{.name}}-${template_vars.apps["cluster_autoscaler"].name}'
+      annotations:
+        argocd.argoproj.io/sync-wave: "0"
+    spec:
+      project: ${template_vars.project_name}
+      source:
+        repoURL: https://kubernetes.github.io/autoscaler
+        chart: cluster-autoscaler
+        targetRevision: 9.19.1
+        helm:
+          values: '${jsonencode(yamldecode(template_vars.apps["cluster_autoscaler"].values))}'
+      destination:
+        server: "{{.server}}"
+        namespace: ${template_vars.apps["cluster_autoscaler"].namespace}
+      syncPolicy:
+        automated:
+          prune: true  # Automatically prune outdated resources
+          selfHeal: true  # Auto-heal if the state is out of sync
+        syncOptions:
+          - CreateNamespace=true
+          - Retry=10
+          - Timeout=180
