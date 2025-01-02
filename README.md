@@ -12,13 +12,13 @@ Terraform module to create GitOps repo
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | 1.10.3 |
 | <a name="requirement_github"></a> [github](#requirement\_github) | 6.4.0 |
-| <a name="requirement_local"></a> [local](#requirement\_local) | 2.5.1 |
+| <a name="requirement_local"></a> [local](#requirement\_local) | 2.5.2 |
 ## Providers
 
 | Name | Version |
 |------|---------|
 | <a name="provider_github"></a> [github](#provider\_github) | 6.4.0 |
-| <a name="provider_local"></a> [local](#provider\_local) | 2.5.1 |
+| <a name="provider_local"></a> [local](#provider\_local) | 2.5.2 |
 ## Modules
 
 No modules.
@@ -30,7 +30,7 @@ No modules.
 | [github_repository.gitops_repo](https://registry.terraform.io/providers/integrations/github/6.4.0/docs/resources/repository) | resource |
 | [github_repository_file.files](https://registry.terraform.io/providers/integrations/github/6.4.0/docs/resources/repository_file) | resource |
 | [github_repository_file.readme](https://registry.terraform.io/providers/integrations/github/6.4.0/docs/resources/repository_file) | resource |
-| [local_file.template_files](https://registry.terraform.io/providers/hashicorp/local/2.5.1/docs/data-sources/file) | data source |
+| [local_file.template_files](https://registry.terraform.io/providers/hashicorp/local/2.5.2/docs/data-sources/file) | data source |
 ## Inputs
 
 | Name | Description | Type | Default | Required |
